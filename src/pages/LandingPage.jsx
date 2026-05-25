@@ -36,15 +36,8 @@ function LandingPage() {
     setFeatureIndex((prev) => (prev + 1) % features.length);
   };
 
-  const prevFeature = () => {
-    setFeatureIndex((prev) => (prev - 1 + features.length) % features.length);
-  };
-
-  // Auto-play feature carousel
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFeatureIndex((prev) => (prev + 1) % features.length);
-    }, 5000);
+    const interval = setInterval(nextFeature, 4500);
     return () => clearInterval(interval);
   }, [features.length]);
 
@@ -53,14 +46,17 @@ function LandingPage() {
       <nav className="navbar">
         <div className="nav-brand">
           <img src={logo} alt="Forgot Your Apple Logo" className="logo-img" />
-          <h2>Forgot Your Apple</h2>
+          <h2>Forgot Your Apple :)</h2>
         </div>
       </nav>
 
       <header className="hero-card">
         <div className="hero-text">
           <p className="eyebrow">Secure telehealth platform</p>
-          <h1>Healthcare conversations, without the friction.</h1>
+          <div className="hero-headline-wrapper">
+            <div className="headline-pattern" />
+            <h1>Healthcare conversations, without the friction.</h1>
+          </div>
           <p className="hero-copy">
             Secure teleconsultations, clinical notes, recordings, and patient collaboration in one workspace.
           </p>
@@ -70,18 +66,18 @@ function LandingPage() {
           </div>
         </div>
         <div className="hero-visual">
-          <div className="visual-panel">
-            <svg width="100%" height="100%" viewBox="0 0 200 200" style={{ maxWidth: '200px' }}>
-              <circle cx="100" cy="100" r="80" fill="#7c5cff" opacity="0.2" />
-              <circle cx="100" cy="100" r="60" fill="#7c5cff" opacity="0.4" />
-              <circle cx="100" cy="100" r="40" fill="#7c5cff" />
-            </svg>
-          </div>
-          <div className="visual-panel">
-            <svg width="100%" height="100%" viewBox="0 0 200 100" style={{ maxWidth: '200px' }}>
-              <rect x="10" y="20" width="80" height="60" fill="#7c5cff" opacity="0.3" />
-              <rect x="110" y="20" width="80" height="60" fill="#7c5cff" opacity="0.6" />
-            </svg>
+          <div className="visual-panel pattern-visual">
+            <div className="pattern-grid" />
+            <div className="pattern-ring ring-1" />
+            <div className="pattern-ring ring-2" />
+            <div className="pattern-ring ring-3" />
+            <div className="pattern-node node-a" />
+            <div className="pattern-node node-b" />
+            <div className="pattern-node node-c" />
+            <div className="visual-copy">
+              <strong>Trusted care flow.</strong>
+              <span>Always connected, always private, always designed for modern healthcare.</span>
+            </div>
           </div>
         </div>
       </header>
@@ -89,9 +85,6 @@ function LandingPage() {
       <section className="feature-carousel">
         <h2>Powerful features for modern healthcare</h2>
         <div className="carousel-wrapper">
-          <button className="carousel-btn side prev" onClick={prevFeature}>
-            ←
-          </button>
           <div className="carousel-track" style={{
             transform: `translateX(calc(-${featureIndex * 33.333}% - ${featureIndex * 16}px))`
           }}>
@@ -104,9 +97,9 @@ function LandingPage() {
               </div>
             ))}
           </div>
-          <button className="carousel-btn side next" onClick={nextFeature}>
-            →
-          </button>
+        </div>
+        <div className="carousel-subtitle">
+          Demo mode: automatic feature preview, no arrows needed.
         </div>
         <div className="carousel-dots">
           {features.map((_, idx) => (
